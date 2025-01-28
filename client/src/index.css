@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100,200,300,400,500,600,700,800,900;1,100..900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Colors Scheme Lookups used  */
+
+:root {
+  --primary: #00bcd4;
+  --secondary: #01427a;
+  --ternary: #6c6c6c;
+  --danger: #e14177;
+  --pure: #fefefe;
+  --light: #f0f0f0;
+  --heaven: #ffffff;
+  --footer: #20333f;
+  --black: #0c0c0d;
+  --logo: #ff5757;
+
+  /* Varient Colors */
+  --selective-yellow: hsl(42, 94%, 55%);
+  --light-gray: #555;
+  --isabelline: hsl(36, 33%, 94%);
+  --gray-x-11: hsl(0, 0%, 73%);
+  --kappel-15: hsla(170, 75%, 41%, 0.15);
+  --platinum: hsl(0, 0%, 90%);
+  --gray-web: hsl(0, 0%, 50%);
+  --kappel: hsla(170, 75%, 41%, 0.634);
+  --light-color: #888;
+  --light-bg: #eee;
+  --white: #fff;
+  --radical-red: hsla(11, 62%, 53%, 0.634);
+}
+
+/* General html page css  ////////////////
+//////////////////////////////////////////*/
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style-type: none;
+  font-family: "Raleway-Black";
+  scroll-behavior: smooth;
+}
+
+body {
+  scrollbar-width: 6px;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Raleway-samibold";
+  position: relative;
+  width: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+/* Updated heading styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-style: normal;
+  line-height: 1.2;
+}
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-style: normal;
+  font-size: clamp(24px, 5vw, 38px);
+  /* Made font size responsive */
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-style: normal;
+  font-size: clamp(18px, 4vw, 24px);
+  /* Made font size responsive */
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: clamp(16px, 3vw, 20px);
+  /* Made font size responsive */
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+h4 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: clamp(16px, 2.5vw, 18px);
+  /* Made font size responsive */
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+h5 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/* nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  background: var(--pure);
+} */
+
