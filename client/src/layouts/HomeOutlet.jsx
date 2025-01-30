@@ -6,12 +6,12 @@ import Footer from "../shared/Footer";
 const HomeOutlet = () => {
   return (
     <>
-      <div>
         <ScrollRestoration />
         <Header />
+      <div className="container mx-auto p-8 m-8">
         <Outlet />
-        <Footer />
       </div>
+        <Footer />
     </>
   );
 };
