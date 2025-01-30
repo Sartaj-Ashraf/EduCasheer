@@ -13,7 +13,7 @@ const Hero = () => {
 
   return (
     <div className=" bg-[#fefefe]">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8  items-center py-12 px-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8  items-center">
         {/* Left Section - Visual */}
         <div className="relative order-2 lg:order-1 items-start">
           <div className="relative rounded-xl overflow-hidden">

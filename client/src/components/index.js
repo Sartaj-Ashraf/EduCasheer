@@ -4,3 +4,4 @@ export {default as DesktopNav} from "./navbar/DesktopNav";
 export {default as Hero} from "./homeComponents/hero";
 export {default as Testimonials} from "./homeComponents/Testimonials";
 export {default as Categories} from "./homeComponents/Categories";
+export {default as PopularCourses} from "./homeComponents/PopularCourses";
