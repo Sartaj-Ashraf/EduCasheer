@@ -19,7 +19,5 @@ import userRouter from "./routes/user.routes.js"
 // Routes declaration
 app.use("/api/v1/users", userRouter)
 
-
-
 // https://localhost:5000/api/v1/user/register
 export { app }
