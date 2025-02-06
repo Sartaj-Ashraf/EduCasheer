@@ -1,90 +1,91 @@
 import mongoose, { Schema } from "mongoose";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs"
+import bcrypt from "bcryptjs";
 
-const userSchema = new Schema({
+const userSchema = new Schema(
+  {
     username: {
-        type: String,
-        unique: true,
-        required: [true, 'Username is required'],
-        lowercase: true,
-        trim: true,
-        index: true,
+      type: String,
+      unique: true,
+      required: true,
+      lowercase: true,
+      trim: true,
+      index: true,
     },
     email: {
-        type: String,
-        unique: true,
-        required: [true, 'Email is required'],
-        lowercase: true,
-        trim: true,
-
+      type: String,
+      unique: true,
+      required: true,
+      lowercase: true,
+      trim: true,
     },
     fullName: {
-        type: String,
-        required: true,
-        trim: true,
-        index: true,
+      type: String,
+      required: true,
+      trim: true,
+      index: true,
     },
     avatar: {
-        type: String,
-        required: true,
+      type: String,
     },
     coverImage: {
-        type: String,
-
+      type: String,
     },
     watchHistory: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Video'
-        }
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Video",
+      },
     ],
     password: {
-        type: String,
-        required: [true, 'Password is required'],
+      type: String,
+      required: [true, "Password is required"],
     },
     refreshToken: {
-        type: String,
+      type: String,
     },
     role: {
-        type: String,
-        enum: ["user", "admin", "guest"],
-        default: "user"
-    }
-}
-    , {
-        timestamps: true
-    })
+      type: String,
+      enum: ["user", "admin", "guest"],
+      default: "user",
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-userSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) return next();
-    this.password = await bcrypt.hash(this.password, 10);
-    next();
-})
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
+});
 userSchema.methods.isPasswordCorrect = async function (password) {
-    return await bcrypt.compare(password, this.password);
-}
+  return await bcrypt.compare(password, this.password);
+};
 userSchema.methods.generateAccessToken = function () {
-    return jwt.sign({
-        id: this._id,
-        email: this.email,
-        username: this.username,
-        fullName: this.fullName
+  return jwt.sign(
+    {
+      id: this._id,
+      email: this.email,
+      username: this.username,
+      fullName: this.fullName,
     },
-        process.env.ACCESS_TOKEN_SECRET,
-        {
-            expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN
-        }
-    )
-}
+    process.env.ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN,
+    }
+  );
+};
 userSchema.methods.generateRefreshToken = function () {
-    return jwt.sign({
-        id: this._id,
+  return jwt.sign(
+    {
+      id: this._id,
     },
-        process.env.REFRESH_TOKEN_SECRET,
-        {
-            expiresIn: process.env.REFRESH_TOKEN_EXPIRES_IN
-        }
-    )
-}
-export const User = mongoose.model('User', userSchema);
+    process.env.REFRESH_TOKEN_SECRET,
+    {
+      expiresIn: process.env.REFRESH_TOKEN_EXPIRES_IN,
+    }
+  );
+};
+export const User = mongoose.model("User", userSchema);

@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from "react";
 
 import HomeOutlet from "../layouts/HomeOutlet";
 import { homeRoutes } from "./homeRoutes";
+import { authRoutes } from "./authRoutes";
 
 export const routes = [
   {
@@ -18,5 +19,5 @@ export const routes = [
   },
   // Routes that dont need the header and footer
   // ...destinationsRoutes,
-  //   ...authRoutes,
+  ...authRoutes,
 ];
