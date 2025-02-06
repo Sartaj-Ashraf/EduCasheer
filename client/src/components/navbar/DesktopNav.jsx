@@ -127,14 +127,14 @@ const DesktopNav = () => {
             ) : (
               <div className="flex items-center space-x-4">
                 <button
-                  onClick={() => navigate("/signup")}
-                  className="bg-[#00bcd4] text-white px-6 py-2 rounded-lg hover:bg-[#01427a] transition-colors duration-300"
+                  onClick={() => navigate("/register")}
+                  className="btn-primary"
                 >
                   Register
                 </button>
                 <button
                   onClick={() => navigate("/login")}
-                  className="border-2 border-[#00bcd4] text-[#00bcd4] px-6 py-2 rounded-lg hover:bg-[#00bcd4] hover:text-white transition-colors duration-300"
+                  className="btn-outline"
                 >
                   Login
                 </button>
