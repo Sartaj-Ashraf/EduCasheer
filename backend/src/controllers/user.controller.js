@@ -38,9 +38,9 @@ const validateUserInput = (fullName, username, email, password) => {
 // Handle file upload for registering User eg avatar and cover photo
 const handleFileUpload = async (files) => {
   const avatarLocalPath = files?.avatar?.[0]?.path;
-  if (!avatarLocalPath) {
-    throw new ApiError(400, "Avatar is required");
-  }
+  // if (!avatarLocalPath) {
+  //   throw new ApiError(400, "Avatar is required");
+  // }
 
   let coverImageLocalPath;
   if (files?.coverImage?.[0]?.path) {
@@ -52,9 +52,9 @@ const handleFileUpload = async (files) => {
     coverImageLocalPath ? uploadOnCloudinary(coverImageLocalPath) : null,
   ]);
 
-  if (!avatar) {
-    throw new ApiError(400, "Error uploading avatar");
-  }
+  // if (!avatar) {
+  //   throw new ApiError(400, "Error uploading avatar");
+  // }
 
   return { avatar, coverImage };
 };
@@ -73,22 +73,20 @@ const registerUser = asyncHandler(async (req, res) => {
         { email: email.toLowerCase() },
       ],
     });
-
     if (existingUser) {
-      throw new ApiError(
-        409,
-        `User with ${existingUser.email === email ? "email" : "username"} already exists`
-      );
+      return res
+        .status(409)
+        .json({ error: `User with ${existingUser.email === email ? "email" : "username"} already exists` });
     }
 
     // Handle file uploads
-    const { avatar, coverImage } = await handleFileUpload(req.files);
+    const { avatar, coverImage } = await handleFileUpload(req.files || {});
 
     // Create user
     const user = await User.create({
       email: email.toLowerCase(),
       fullName,
-      avatar: avatar.url,
+      avatar: avatar?.url || "",
       coverImage: coverImage?.url || "",
       password,
       username: username.toLowerCase(),
