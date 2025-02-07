@@ -24,7 +24,6 @@ class ApiError extends Error {
             statusCode: this.statusCode,
             data: this.data,
             errors: this.errors,
-            ...(process.env.NODE_ENV === 'development' && { stack: this.stack })
         };
     }
 }

@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import Home from "../pages/Home";
 import { Register } from "../pages";
 import { registerAction } from "../pages/auth/Register";
 

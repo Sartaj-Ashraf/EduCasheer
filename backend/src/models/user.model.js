@@ -4,6 +4,12 @@ import bcrypt from "bcryptjs";
 
 const userSchema = new Schema(
   {
+    fullName: {
+      type: String,
+      required: true,
+      trim: true,
+      index: true,
+    },
     username: {
       type: String,
       unique: true,
@@ -19,11 +25,9 @@ const userSchema = new Schema(
       lowercase: true,
       trim: true,
     },
-    fullName: {
+    password: {
       type: String,
       required: true,
-      trim: true,
-      index: true,
     },
     avatar: {
       type: String,
@@ -37,10 +41,7 @@ const userSchema = new Schema(
         ref: "Video",
       },
     ],
-    password: {
-      type: String,
-      required: [true, "Password is required"],
-    },
+
     refreshToken: {
       type: String,
     },
