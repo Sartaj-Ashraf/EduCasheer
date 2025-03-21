@@ -14,9 +14,14 @@ import {
 } from "../controllers/user.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { varifyJWT } from "../middlewares/auth.middleware.js";
+import {
+  validateLoginInput,
+  validateRegisterInput,
+} from "../middlewares/ValidationMiddleware.js";
 const router = Router();
 
 router.route("/register").post(
+  validateRegisterInput,
   upload.fields([
     {
       name: "avatar",
@@ -29,7 +34,7 @@ router.route("/register").post(
   ]),
   registerUser
 );
-router.route("/login").post(loginUser);
+router.route("/login").post(validateLoginInput, loginUser);
 router.route("/logout").post(varifyJWT, logoutUser);
 router.route("/refresh-token").post(refreshAccessToken);
 router.route("/change-password").post(varifyJWT, changeCurrentPassword);

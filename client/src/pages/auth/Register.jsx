@@ -11,7 +11,6 @@ import { FaUserGraduate, FaEnvelope, FaLock, FaCamera } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { registerImage } from "../../assets/images";
 import { customFetch } from "../../utils/customFetch";
-import { useUser } from "../../context/userContext";
 
 export const registerAction = async ({ request }) => {
   const result = await request.formData();
@@ -19,12 +18,12 @@ export const registerAction = async ({ request }) => {
   try {
     const response = await customFetch.post("/users/register", user);
     if (response.status === 201) {
-      toast.success("Please check your email for verification");
+      toast.success("Account created successfully!");
     }
     return { success: response.data.msg };
   } catch (error) {
-    // console.log({ error })
-    return { error: error?.response?.data?.error || "An error occurred during registration." };
+    console.log({ error });
+    return { error: error.response?.data?.msg || "Registration failed" };
   }
 };
 // Input field configurations
@@ -75,11 +74,11 @@ const FormInput = ({ field, error }) => (
         type={field.type}
         id={field.id}
         name={field.id}
-        className={`pl-10 block w-full border ${error ? "border-red-500" : "border-[var(--grey-300)]"
-          } rounded-lg py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500`}
+        className={`pl-10 block w-full border ${
+          error ? "border-red-500" : "border-[var(--grey-300)]"
+        } rounded-lg py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500`}
         placeholder={field.placeholder}
-        minLength={field.minLength}
-
+        // minLength={field.minLength}
       />
     </div>
   </div>
@@ -87,7 +86,7 @@ const FormInput = ({ field, error }) => (
 
 const Register = () => {
   const data = useActionData();
-  console.log({ data })
+  console.log({ data });
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   const [showPassword, setShowPassword] = useState(false);
@@ -126,19 +125,13 @@ const Register = () => {
             </p>
           </div>
 
-          <Form
-            method="post"
-            className="mt-8 space-y-6"
-          >
+          <Form method="post" className="mt-8 space-y-6">
             <p className="text-red-400 text-center">
               {data?.error && data.error.split(",")[0]}
             </p>
             <div className="space-y-4">
               {INPUT_FIELDS.map((field) => (
-                <FormInput
-                  key={field.id}
-                  field={field}
-                />
+                <FormInput key={field.id} field={field} />
               ))}
             </div>
             <button

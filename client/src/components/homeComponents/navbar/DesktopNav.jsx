@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaAngleDown, FaUserCircle } from "react-icons/fa";
+import { useUser } from "../../../context/userContext";
 
 const DesktopNav = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { user } = useUser();
   const navigate = useNavigate();
 
   const studyMaterials = [
@@ -32,6 +34,7 @@ const DesktopNav = () => {
     { title: "Popular Libraries Program", link: "#" },
   ];
 
+  console.log({ user });
   return (
     <header className="hidden lg:flex  py-2 h-20 w-full z-50 sticky top-0 bg-[var(--light)]">
       <nav className="container mx-auto px-4 flex ">
@@ -120,9 +123,10 @@ const DesktopNav = () => {
 
           {/* Auth Buttons */}
           <div className="flex items-center space-x-4">
-            {isLoggedIn ? (
-              <button className="p-2 rounded-full hover:bg-[#f0f0f0] transition-colors duration-300">
+            {user ? (
+              <button className="p-2 rounded-full hover:bg-[#f0f0f0] transition-colors duration-300 flex gap-2">
                 <FaUserCircle className="text-2xl text-[#00bcd4]" />
+                <p>{user?.fullName}</p>
               </button>
             ) : (
               <div className="flex items-center space-x-4">

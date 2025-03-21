@@ -1,6 +1,7 @@
 import React, { Suspense } from "react";
-import { Register } from "../pages";
+import { Login, Register } from "../pages";
 import { registerAction } from "../pages/auth/Register";
+// import { loginAction } from "../pages/auth/Login";
 
 export const authRoutes = [
   {
@@ -11,5 +12,14 @@ export const authRoutes = [
       </Suspense>
     ),
     action: registerAction,
+  },
+  {
+    path: "/login",
+    element: (
+      <Suspense fallback={<h1>Loading</h1>}>
+        <Login />
+      </Suspense>
+    ),
+    // action: loginAction,
   },
 ];
