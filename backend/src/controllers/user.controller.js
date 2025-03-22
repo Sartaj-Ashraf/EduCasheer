@@ -20,20 +20,20 @@ const generateAccessAndRefreshToken = async (userId) => {
   }
 };
 // Validate user inputs
-const validateUserInput = (fullName, username, email, password) => {
-  if ([fullName, username, email, password].some((field) => !field?.trim())) {
-    throw new ApiError(400, "Please fill in the required fields");
-  }
+// const validateUserInput = (fullName, username, email, password) => {
+//   if ([fullName, username, email, password].some((field) => !field?.trim())) {
+//     throw new ApiError(400, "Please fill in the required fields");
+//   }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    throw new ApiError(400, "Invalid email format");
-  }
+//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//   if (!emailRegex.test(email)) {
+//     throw new ApiError(400, "Invalid email format");
+//   }
 
-  if (password.length < 8) {
-    throw new ApiError(400, "Password must be at least 8 characters long");
-  }
-};
+//   if (password.length < 8) {
+//     throw new ApiError(400, "Password must be at least 8 characters long");
+//   }
+// };
 
 // Handle file upload for registering User eg avatar and cover photo
 const handleFileUpload = async (files) => {
@@ -64,7 +64,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
   try {
     // Validate user input
-    validateUserInput(fullName, username, email, password);
+    // validateUserInput(fullName, username, email, password);
 
     // Check for existing user
     const existingUser = await User.findOne({
@@ -76,7 +76,9 @@ const registerUser = asyncHandler(async (req, res) => {
     if (existingUser) {
       return res
         .status(409)
-        .json({ error: `User with ${existingUser.email === email ? "email" : "username"} already exists` });
+        .json({
+          error: `User with ${existingUser.email === email ? "email" : "username"} already exists`,
+        });
     }
 
     // Handle file uploads
@@ -169,7 +171,6 @@ const logoutUser = asyncHandler(async (req, res) => {
     .clearCookie("accessToken", options)
     .clearCookie("refreshToken", options)
     .json(new ApiResponse(200, "Logged out successfully"))
-    .json(new ApiResponse(200, "Logged out successfully"));
 });
 
 const refreshAccessToken = asyncHandler(async (req, res) => {

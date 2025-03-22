@@ -3,6 +3,7 @@ import React, { lazy, Suspense } from "react";
 import HomeOutlet from "../layouts/HomeOutlet";
 import { homeRoutes } from "./homeRoutes";
 import { authRoutes } from "./authRoutes";
+import { userRoutes } from "./userRoutes";
 
 export const routes = [
   {
@@ -15,7 +16,7 @@ export const routes = [
 
     // Routes that need homeOutlet, meaning pages that need header and footer
 
-    children: [...homeRoutes],
+    children: [...homeRoutes, ...userRoutes],
   },
   // Routes that dont need the header and footer
   // ...destinationsRoutes,

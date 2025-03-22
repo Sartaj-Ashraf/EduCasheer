@@ -1,27 +1,23 @@
 import dotenv from "dotenv";
 import connectDB from "./src/db/index.js";
 import { app } from "./src/app.js";
-const port =process.env.PORT || 5000
+import errorHandlerMiddleware from "./src/middlewares/errorHandler.middleware.js";
+const port = process.env.PORT || 5000;
 dotenv.config({
-    path:"./env"
+  path: "./env",
 });
 
-
+app.use(errorHandlerMiddleware);
 
 connectDB()
-.then(()=>{
+  .then(() => {
     app.listen(port, () => {
-                console.log(`Server running on port https://localhost:${port}`); 
-            });
-})
-.catch(err=>{
-    console.error("MongoDb connection failed",err)
-})
-
-
-
-
-
+      console.log(`Server running on port https://localhost:${port}`);
+    });
+  })
+  .catch((err) => {
+    console.error("MongoDb connection failed", err);
+  });
 
 // DB Connection setting
 // (async()=>{
@@ -31,12 +27,10 @@ connectDB()
 //         console.log("App error ", error)
 //     })
 //     app.listen(port, () => {
-//         console.log(`Server running on port https://localhost:${port}`); 
+//         console.log(`Server running on port https://localhost:${port}`);
 //     });
 // } catch (error) {
 //     console.error("ERROR", error)
 //     throw new error("ERROR Connecting DB")
 // }
 // })();
-
-
